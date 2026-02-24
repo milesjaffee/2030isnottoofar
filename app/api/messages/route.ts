@@ -14,7 +14,7 @@ export async function POST(req: Request) {
   const { error } = await supabase.from("messages").insert({
     email,
     content: message,
-    verification_token: token,
+    created_at: new Date(),
   });
 
   if (error) {

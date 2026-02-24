@@ -1,0 +1,7 @@
+* Work out database connection
+
+* Clean up css for input screen
+
+* Work out verification
+
+* Work out auto emailing
