@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
+import { redirect } from 'next/navigation';
+
+//redrection - 3 possibilities: no token in request error, token not found (presumable already redeemed) error, and Success! 
 
 export async function GET(req: NextRequest) {
   const token = new URL(req.url).searchParams.get("token");
@@ -18,10 +21,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  if (data.verified_at) {
-    return NextResponse.json({ success: true, alreadyVerified: true });
-  }
-
   await supabase
     .from("messages")
     .update({
@@ -29,6 +28,7 @@ export async function GET(req: NextRequest) {
       verification_token: null,
     })
     .eq("id", data.id);
+    //could be returning id number as "you are the Xth person to..."
 
   return NextResponse.json({ success: true });
 }

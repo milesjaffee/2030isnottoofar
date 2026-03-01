@@ -11,9 +11,8 @@ export default function Home() {
   const [view, setView] = useState<"home" | "write">("home");
 
   return (
-    <main className="min-h-screen bg-[conic-gradient(#9233ea,#db2777,#2564eb)] text-neutral-100 flex items-center justify-center p-6">
-      {view === "home" ? <HomeScreen onWrite={() => setView("write")} /> : <WriteScreen onBack={() => setView("home")} />}
-    </main>
+    
+      <div>{view === "home" ? <HomeScreen onWrite={() => setView("write")} /> : <WriteScreen onBack={() => setView("home")} />}</div>
   );
 }
 

@@ -15,6 +15,7 @@ export async function POST(req: Request) {
     email,
     content: message,
     created_at: new Date(),
+    verification_token: token,
   });
 
   if (error) {

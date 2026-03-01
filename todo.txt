@@ -1,7 +1,16 @@
-* Work out database connection
+VERIFICATION
 
-* Clean up css for input screen
+* Processing verification endpoint with a success PAGE
+* Auto emailing those verification endpoints
+* Marketable shareable image
+Stretch:
+* Obfuscate message data at rest (encryption)
+* Preventing duplicate verified messages per email
 
-* Work out verification
+POLISHING
+* Make homepage display real stats
+* Make messages track country of origin
 
-* Work out auto emailing
+WRAPPING UP
+* Cybersecurity; tighten loose hatches on things
+

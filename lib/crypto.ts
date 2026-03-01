@@ -1,34 +1,43 @@
-import { NextResponse } from "next/server";
-import { supabase } from "./supabase";
+import crypto from "crypto";
 
-export async function GET(req: Request) {
-  const token = new URL(req.url).searchParams.get("token");
+const ALGORITHM = "aes-256-gcm";
+const KEY = Buffer.from(process.env.MESSAGE_ENCRYPTION_KEY!, "hex");
 
-  if (!token) {
-    return NextResponse.json({ error: "Invalid token" }, { status: 400 });
-  }
+export function encrypt(text: string) {
+  const iv = crypto.randomBytes(12);
+  const cipher = crypto.createCipheriv(ALGORITHM, KEY, iv);
 
-  const { data, error } = await supabase
-    .from("messages")
-    .select("id, verified_at")
-    .eq("verification_token", token)
-    .single();
+  const encrypted = Buffer.concat([
+    cipher.update(text, "utf8"),
+    cipher.final(),
+  ]);
 
-  if (!data || error) {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
-  }
+  const tag = cipher.getAuthTag();
 
-  if (data.verified_at) {
-    return NextResponse.json({ success: true, alreadyVerified: true });
-  }
+  return {
+    iv: iv.toString("hex"),
+    content: encrypted.toString("hex"),
+    tag: tag.toString("hex"),
+  };
+}
 
-  await supabase
-    .from("messages")
-    .update({
-      verified_at: new Date().toISOString(),
-      verification_token: null,
-    })
-    .eq("id", data.id);
+export function decrypt(payload: {
+  iv: string;
+  content: string;
+  tag: string;
+}) {
+  const decipher = crypto.createDecipheriv(
+    ALGORITHM,
+    KEY,
+    Buffer.from(payload.iv, "hex")
+  );
 
-  return NextResponse.json({ success: true });
+  decipher.setAuthTag(Buffer.from(payload.tag, "hex"));
+
+  const decrypted = Buffer.concat([
+    decipher.update(Buffer.from(payload.content, "hex")),
+    decipher.final(),
+  ]);
+
+  return decrypted.toString("utf8");
 }
