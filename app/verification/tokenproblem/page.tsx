@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 
 export default function Verified() {
 
-    const id = useSearchParams().get("id") || "many";
+    //const id = useSearchParams().get("id") || "many";
     return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

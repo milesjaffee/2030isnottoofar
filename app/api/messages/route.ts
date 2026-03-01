@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 import crypto from "crypto";
+import { encrypt } from "@/lib/crypto";
 
 export async function POST(req: Request) {
   const { email, message } = await req.json();
@@ -11,9 +12,13 @@ export async function POST(req: Request) {
 
   const token = crypto.randomBytes(32).toString("hex");
 
+  const encrypted = encrypt(message);
+
   const { error } = await supabase.from("messages").insert({
     email,
-    content: message,
+    content_encrypted: encrypted.content,
+    content_iv: encrypted.iv,
+    content_tag: encrypted.tag,
     created_at: new Date(),
     verification_token: token,
   });

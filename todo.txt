@@ -1,10 +1,10 @@
 VERIFICATION
 
-* Processing verification endpoint with a success PAGE
+X Processing verification endpoint with a success PAGE
 * Auto emailing those verification endpoints
 * Marketable shareable image
 Stretch:
-* Obfuscate message data at rest (encryption)
+X Obfuscate message data at rest (encryption)
 * Preventing duplicate verified messages per email
 
 POLISHING
