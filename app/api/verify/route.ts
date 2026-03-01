@@ -7,8 +7,10 @@ import { redirect } from 'next/navigation';
 export async function GET(req: NextRequest) {
   const token = new URL(req.url).searchParams.get("token");
 
+  const failedDestinationUrl = `/verification/tokenproblem`;
+
   if (!token) {
-    return NextResponse.json({ error: "Invalid token" }, { status: 400 });
+    redirect(failedDestinationUrl);
   }
 
   const { data, error } = await supabase
@@ -18,7 +20,7 @@ export async function GET(req: NextRequest) {
     .single();
 
   if (!data || error) {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
+    redirect(failedDestinationUrl);
   }
 
   await supabase
@@ -28,7 +30,9 @@ export async function GET(req: NextRequest) {
       verification_token: null,
     })
     .eq("id", data.id);
-    //could be returning id number as "you are the Xth person to..."
+    //returning id number as "you are the Xth person to..."
 
-  return NextResponse.json({ success: true });
+    const successUrl = `/verification?id=${data.id}`;
+
+  redirect(successUrl);
 }
