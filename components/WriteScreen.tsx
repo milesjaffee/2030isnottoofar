@@ -18,7 +18,7 @@ export default function WriteScreen({ onBack }: { onBack: () => void }) {
 
       <h2 className="text-4xl font-semibold">Write to 2030 you</h2>
       <p className="">
-        Be honest. Be kind. Be bold. You won’t remember writing this.
+        Be honest. Be kind. Be bold. You won't remember writing this.
       </p>
 
       <Textarea
@@ -49,7 +49,7 @@ export default function WriteScreen({ onBack }: { onBack: () => void }) {
 
           if (await res.json()) {
             console.log(res);
-            alert("Your message has been saved for 2030.");
+            alert("Your message has been saved for 2030. Check your email (and spam folder) to confirm your email address! (We will obviously never send you anything until, well, 2030).");
             setMessage("");
             setEmail("");
           } else {

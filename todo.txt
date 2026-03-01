@@ -1,7 +1,7 @@
 VERIFICATION
 
 X Processing verification endpoint with a success PAGE
-* Auto emailing those verification endpoints
+* Auto emailing those verification endpoints - Using Resend.
 * Marketable shareable image
 Stretch:
 X Obfuscate message data at rest (encryption)
