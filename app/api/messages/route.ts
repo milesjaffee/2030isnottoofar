@@ -3,10 +3,15 @@ import { supabase } from "@/lib/supabase";
 import { resend } from "@/lib/resend";
 import crypto from "crypto";
 import { encrypt } from "@/lib/crypto";
+import * as fs from 'node:fs';
+
 
 function email_html(token: string) {
-  return "<p>actual email coming soon - access verification at <a href=`https://2030.milesj.org/api/verify?token="+token+"`>this link</a>!</p>"
+  let html = fs.readFileSync('emails/verify/email.html', 'utf8');
+  // Replace a placeholder
+  html = html.replace('{{ACTION_URL}}', `https://2030.milesj.org/api/verify?token=${token}`);
   
+  return html;
 }
 
 function sendVerificationEmail(email: string, token: string) {

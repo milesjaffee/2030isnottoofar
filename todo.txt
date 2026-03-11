@@ -1,11 +1,13 @@
 VERIFICATION
 
 X Processing verification endpoint with a success PAGE
-* Auto emailing those verification endpoints - Using Resend.
+X Auto emailing those verification endpoints - Using Resend.
+* Aesthetic cool email.
 * Marketable shareable image
-Stretch:
+
 X Obfuscate message data at rest (encryption)
-* Preventing duplicate verified messages per email
+* Preventing duplicate *verified* messages per email
+* Make sure there is actually an error message on frontend when there is an issue wtih duplicate emails
 
 POLISHING
 * Make homepage display real stats
