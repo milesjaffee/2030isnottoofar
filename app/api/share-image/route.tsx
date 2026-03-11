@@ -1,3 +1,4 @@
+import { supabase } from "@/lib/supabase";
 import { ImageResponse } from "next/og";
 
 export const contentType = "image/png";
@@ -34,36 +35,74 @@ const getFlagEmoji = (countryCode: string) => {
   return String.fromCodePoint(...codePoints);
 };
 
+const roundUpToNearestPowerOf10 = (n: number) => {
+  if (n <= 0) {
+    return 1; // Returns 1 for non-positive numbers (or adjust as needed)
+  }
+  // Calculate the base-10 logarithm, round up the exponent, and use it as the new power
+  let exponent = Math.ceil(Math.log10(n));
+  return Math.pow(10, exponent);
+}
+
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
 
-  const rank = searchParams.get("rank") ?? "482";
-  const country = searchParams.get("country") ?? "unknown";
-  const timestamp = searchParams.get("time") ?? "unknown";
+  const id = searchParams.get("id") ?? "482";
+
+
+  const { data, error } = await supabase
+      .from("messages")
+      .select("country, verified_at")
+      .eq("id", id)
+      .single();
+
+
+    const rank: string = id;
+    const country: string =  data?.country! || "US"; 
+    const timestamp =  data?.verified_at! || "null";
 
   return new ImageResponse( 
     ( 
       <div style={{
         display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
         width: "100%",
         height: "100%",
         padding: (parseInt(rank) < 100000)? "20px" : "0px",
-        paddingTop: (parseInt(rank) < 100000)? "130px" : "0px",
+        //paddingTop: (parseInt(rank) < 100000)? "130px" : "0px",
 
-        
+        backgroundImage: (parseInt(rank) < 1000)? "linear-gradient(120deg, #eea000, #eec646)":
+                        (parseInt(rank) < 10000)? "linear-gradient(130deg, #aaaeee, #dddeeb)":
+                        (parseInt(rank) < 100000)? "linear-gradient(150deg, #fe8025, #de6000)":
+                        "linear-gradient(90deg, #db2777, #2564eb)"
         
       }}>
+
+        <div style={{
+          fontSize: 65,
+          color: "white",
+          padding: "20px",
+          alignContent: "center",
+          textAlign: "center",
+          justifySelf: "center",
+          width: "100%",
+          display: "flex",
+        }}>
+          FIRST {roundUpToNearestPowerOf10(parseInt(rank)).toLocaleString()} MESSAGES
+
+        </div>
         <div style={{
             backgroundImage: "linear-gradient(76deg, #db2777, #2564eb)",
             color: "white",
             width: "100%",
-            height: "100%",
+            height: "90%",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             padding: "20px",
             fontSize: 55,
-            fontFamily: "sans-serif",
+            fontFamily: "Verdana",
           }}
         >
             <p style={{ fontSize: 90, fontWeight: "bold" }}>
@@ -73,20 +112,20 @@ export async function GET(req: Request) {
             <div style={{ marginTop: 40, display: "flex" }}>
               I am the {formatOrdinals(rank)} person to send a message to my future self.</div>
 
-            <div style={{ marginTop: 40, fontSize: 32, display: "flex" }}>
+            <div style={{ marginTop: 40, display: "flex" }}>
               Sent from: {country +" "+ getFlagEmoji(country)} | Verified: {timestamp}
             </div>
 
-            <div style={{ marginTop: 40, fontSize: 28, color: "#aaa" }}>
-              2030isnottoofar.com
-            </div>
+            <em style={{ marginTop: 40, color: "#ddd"}}>
+              Send your own message: 2030.milesj.org
+            </em>
           </div>
         </div>
     ),
     
     {
       width: 1200,
-      height: 1200
+      height: 1200,
     }
   );
     

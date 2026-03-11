@@ -17,9 +17,10 @@ function Page() {
             You are the latest of {id} to verify your message.
         </p>
 
+        <img src={`/api/share-image?id=${id}`} width={"300px"}/>
+
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <StatCard label="Share 2030 Over Text" value="Share" />
-            <StatCard label="Get a Shareable Image" value="Get Image" />
             <StatCard label="Return Home" value="Home" />
         </div>
 

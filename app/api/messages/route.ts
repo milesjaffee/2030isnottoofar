@@ -15,8 +15,9 @@ function email_html(token: string) {
 }
 
 function sendVerificationEmail(email: string, token: string) {
+  console.log(email_html(token));
   resend.emails.send( {
-    from: 'noreply@2030.milesj.org',
+    from: '2030s@2030.milesj.org',
     to: email,
     subject: "Confirm email address for 2030",
     html: email_html(token)

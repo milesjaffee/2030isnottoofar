@@ -3,7 +3,7 @@ VERIFICATION
 X Processing verification endpoint with a success PAGE
 X Auto emailing those verification endpoints - Using Resend.
 X Aesthetic cool email.
-* Marketable shareable image
+X Marketable shareable image
 
 X Obfuscate message data at rest (encryption)
 * Preventing duplicate *verified* messages per email
@@ -11,7 +11,8 @@ X Obfuscate message data at rest (encryption)
 
 POLISHING
 * Make homepage display real stats
-* Make messages track country of origin
+X Make messages track country of origin (only works on deployment not localhost?)
+* Share over text
 
 WRAPPING UP
 * Cybersecurity; tighten loose hatches on things
