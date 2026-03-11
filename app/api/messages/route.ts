@@ -34,6 +34,8 @@ export async function POST(req: Request) {
 
   const encrypted = encrypt(message);
 
+  const country = req.headers.get("x-vercel-ip-country")
+
   const { error } = await supabase.from("messages").insert({
     email,
     content_encrypted: encrypted.content,
@@ -41,6 +43,7 @@ export async function POST(req: Request) {
     content_tag: encrypted.tag,
     created_at: new Date(),
     verification_token: token,
+    country: country,
   });
 
   if (error) {
