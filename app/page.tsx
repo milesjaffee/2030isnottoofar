@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
@@ -16,7 +16,38 @@ export default function Home() {
   );
 }
 
+
 function HomeScreen({ onWrite }: { onWrite: () => void }) {
+
+  const [countData, setCountData] = useState(0);
+
+  async function getNumResponses() {
+  let response = await fetch('/api/stats', {
+        method: 'GET',
+        credentials: 'include',
+        headers: { "Content-Type": "application/json" },        
+      });
+
+  if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Execution pauses here until the body is parsed as JSON
+    const count = await response.json();
+
+    //console.log(count.count.id);
+    setCountData(count.count.id);
+
+    /*const outputElement = document.getElementById('msgcount_output');
+  if (outputElement) {
+    outputElement.textContent = JSON.stringify(count, null, 2);
+  }*/
+
+}
+
+  useEffect(() => {
+    getNumResponses();
+  }, [])
 
   const targetDate = new Date("Jan 1, 2030 00:00:00").getTime();
   const now = new Date().getTime();
@@ -28,9 +59,7 @@ function HomeScreen({ onWrite }: { onWrite: () => void }) {
   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  const timeleft = years+ " years, "+days+" days, "+hours+" hours, "+minutes+" minutes, and "+seconds+" seconds"
-
-
+  const timeleft = years+ " years, "+days+" days, "+hours+" hours, "+minutes+" minutes, and "+seconds+" seconds";
 
   return (
     <motion.div
@@ -44,7 +73,7 @@ function HomeScreen({ onWrite }: { onWrite: () => void }) {
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <StatCard label="Messages Written" value={ "18,434"} />
+        <StatCard label="Messages Written" value={countData.toLocaleString() || "0"} />
         <StatCard label="in the future" value={timeleft} />
       </div>
 
