@@ -17,6 +17,21 @@ export default function Home() {
 }
 
 function HomeScreen({ onWrite }: { onWrite: () => void }) {
+
+  const targetDate = new Date("Jan 1, 2030 00:00:00").getTime();
+  const now = new Date().getTime();
+  const distance = targetDate - now;
+
+  const years = Math.floor(distance / (1000 * 60 * 60 * 24 * 365))
+  const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 365))/ (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  const timeleft = years+ " years, "+days+" days, "+hours+" hours, "+minutes+" minutes, and "+seconds+" seconds"
+
+
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -29,9 +44,8 @@ function HomeScreen({ onWrite }: { onWrite: () => void }) {
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <StatCard label="Messages Written" value="18,432" />
-        <StatCard label="Countries" value="62" />
-        <StatCard label="Years Ahead" value="~5" />
+        <StatCard label="Messages Written" value={ "18,434"} />
+        <StatCard label="in the future" value={timeleft} />
       </div>
 
       <Button size="lg" className="text-lg back" variant="ghost" onClick={onWrite}>

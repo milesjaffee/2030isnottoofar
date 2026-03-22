@@ -47,13 +47,13 @@ export default function WriteScreen({ onBack }: { onBack: () => void }) {
             body: JSON.stringify({ message, email }),
           });
 
-          if (await res.json()) {
+          if (res.status == 200) {
             console.log(res);
             alert("Your message has been saved for 2030. Check your email (and spam folder) to confirm your email address! (We will obviously never send you anything until, well, 2030).");
             setMessage("");
             setEmail("");
           } else {
-            alert("Something went wrong. Try again.");
+            alert("Something went wrong. You've probably already used this email to sign up - in which case, sorry, you only get one message! Try again.");
           }
         }}
       >

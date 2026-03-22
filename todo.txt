@@ -1,19 +1,19 @@
 VERIFICATION
 
-X Processing verification endpoint with a success PAGE
-X Auto emailing those verification endpoints - Using Resend.
-X Aesthetic cool email.
-X Marketable shareable image
-
-X Obfuscate message data at rest (encryption)
-* Preventing duplicate *verified* messages per email
-* Make sure there is actually an error message on frontend when there is an issue wtih duplicate emails
+X Preventing duplicate *verified* messages per email (idk if i want to do this - have to consider the secondary case of multiple emails being sent before one gets verified - more valid way might be to make email the primary key and have a new message reset the verification if it's not been verified)
+X Make sure there is actually an error message on frontend when there is an issue wtih duplicate emails
 
 POLISHING
-* Make homepage display real stats
+* Make homepage display real stats, I think with a cron job every hour
 X Make messages track country of origin (only works on deployment not localhost?)
-* Share over text
+* Share over text and link to "write your own message..." in verification screen
+* Verification screen has cool shareable image thing when copied to discord etc
 
 WRAPPING UP
 * Cybersecurity; tighten loose hatches on things
+* Write linkedin post
 
+SENDING MESSAGES IN 2030
+* Make sure decryption works like i think it works
+* Create message email template
+* Send test emails

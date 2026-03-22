@@ -15,7 +15,7 @@ function email_html(token: string) {
 }
 
 function sendVerificationEmail(email: string, token: string) {
-  console.log(email_html(token));
+  //console.log(email_html(token));
   resend.emails.send( {
     from: '2030s@2030.milesj.org',
     to: email,
@@ -52,5 +52,6 @@ export async function POST(req: Request) {
   }
 
   sendVerificationEmail(email, token);
+  //console.log("sent verification email", email, token);
   return NextResponse.json({ success: true });
 }

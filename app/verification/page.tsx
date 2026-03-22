@@ -12,9 +12,16 @@ function Page() {
         animate={{ opacity: 1, y: 0 }}
         className="w-full space-y-10"
         >
+            <meta property="og:image" content="/api/share-image?id=123" />
         <h1 className="text-5xl font-semibold tracking-tight">Verified message!</h1>
         <p className="text-neutral-100 text-lg">
             You are the latest of {id} to verify your message.
+        </p>
+        <p className="text-neutral-100 text-lg">
+            If you'd like, share this with somebody you'll still know in 2030.
+        </p>
+        <p className="text-neutral-100 text-lg">
+            Who else should see this before it's too late?
         </p>
 
         <img src={`/api/share-image?id=${id}`} width={"300px"}/>
