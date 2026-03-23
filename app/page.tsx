@@ -80,6 +80,10 @@ function HomeScreen({ onWrite }: { onWrite: () => void }) {
       <Button size="lg" className="text-lg back" variant="ghost" onClick={onWrite}>
         Send a message to your future self
       </Button>
+
+      <p className="text-neutral-100 text-lg">
+        Created by <a href="https://www.milesj.org" className="opacity-85 hover:opacity-78">Miles Jaffee</a>
+      </p>
     </motion.div>
   );
 }
