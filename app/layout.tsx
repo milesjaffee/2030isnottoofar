@@ -1,5 +1,5 @@
 
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -13,31 +13,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-/*export const metadata: Metadata = {
+export const metadata: Metadata = {
   title: "2030 is not too far",
   description: "2030 is not too far",
-};*/
-
-type Props = {
-  searchParams: { [key: string]: string | string[] | undefined };
 };
-
-export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
-  
-  return {
-    title: `2030 is not too far`,
-    description: `2030 is not too far`,
-    openGraph: {
-    images: [
-      {
-        url: `https://2030.milesj.org/api/share-image/?id=${searchParams? searchParams.shareImage : 0}`, // Use absolute URLs for external images
-
-      },
-      // ... more images
-    ],
-  },
-  };
-}
 
 export default function RootLayout({
   children,
@@ -47,9 +26,6 @@ export default function RootLayout({
   //const id = useSearchParams().get("shareImage") || 0;
   return (
     <html lang="en">
-      <head>
-        
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
