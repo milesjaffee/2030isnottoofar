@@ -5,30 +5,18 @@ import { motion } from "framer-motion"
 import { redirect, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 
-const CopyImageAndText = ( imageUrl: string ) => {
+const copyText = ( id: string ) => {
 
-  const textToCopy = "I just sent a message to myself in 2030. Send your own: https://2030.milesj.org";
+  const textToCopy = `I just sent a message to myself in 2030. Send your own: https://2030.milesj.org/?shareImage=${id}`;
 
   const copyToClipboard = async () => {
     try {
-      // 1. Fetch the image and get it as a Blob
-      const response = await fetch(imageUrl);
-      const blob = await response.blob();
-
-      // 2. Create ClipboardItem for the image (PNG is widely supported)
-      const imageClipboardItem = new ClipboardItem({
-        [blob.type]: blob,
-      });
-
-      // 3. Create ClipboardItem for the plain text
       const textBlob = new Blob([textToCopy], { type: 'text/plain' });
       const textClipboardItem = new ClipboardItem({
         'text/plain': textBlob,
       });
 
-      // 4. Write both items to the clipboard simultaneously
       await navigator.clipboard.write([textClipboardItem]);
-      console.log('Image and text copied to clipboard!');
     } catch (err: any) {
       console.error('Failed to copy: ', err.name, err.message);
     }
@@ -56,7 +44,7 @@ function Page() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
 
-            <Button size="lg" className="text-lg back" variant="ghost" onClick={() => {CopyImageAndText(`/api/share-image?id=${id}`)}}
+            <Button size="lg" className="text-lg back" variant="ghost" onClick={() => {copyText(id)}}
             >
         Copy share message to text
       </Button>

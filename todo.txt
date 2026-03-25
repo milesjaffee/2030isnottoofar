@@ -1,11 +1,7 @@
-POLISHING
-X Make homepage display real stats, I think with a cron job every hour
-X Make messages track country of origin (only works on deployment not localhost?)
-X Share over text and link to "write your own message..." in verification screen
-* Verification screen has cool shareable image thing when copied to discord etc - implement thru base line + custom ?sharedFromId field to embed image, i guess
 
 WRAPPING UP
 * Cybersecurity; tighten loose hatches on things
+* Copied verification toast
 * Write linkedin post
 
 SENDING MESSAGES IN 2030
