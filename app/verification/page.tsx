@@ -37,13 +37,13 @@ const CopyImageAndText = ( imageUrl: string ) => {
 }
 
 function Page() {
-        const id = useSearchParams().get("id") || "many";
+        const id = useSearchParams().get("id") || "0";
         return <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full space-y-10"
         >
-            <meta property="og:image" content="/api/share-image?id=123" />
+            <meta property="og:image" content={`/api/share-image?id=${id}`} />
         <h1 className="text-5xl font-semibold tracking-tight">Verified message!</h1>
         <p className="text-neutral-100 text-lg">
             You are the latest of {id} to verify your message.
