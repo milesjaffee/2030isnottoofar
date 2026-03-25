@@ -30,7 +30,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
     openGraph: {
     images: [
       {
-        url: `localhost:3000/api/share-image/${searchParams? searchParams.shareImage : 0}`, // Use absolute URLs for external images
+        url: `https://2030.milesj.org/api/share-image/?id=${searchParams? searchParams.shareImage : 0}`, // Use absolute URLs for external images
 
       },
       // ... more images
