@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion"
 import { redirect, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
+import { Bounce, ToastContainer, toast } from 'react-toastify';
 
 const copyText = ( id: string ) => {
 
@@ -23,6 +24,8 @@ const copyText = ( id: string ) => {
   };
   copyToClipboard();
 }
+
+const notify = () => toast.success("Copied to clipboard!");
 
 function Page() {
         const id = useSearchParams().get("id") || "0";
@@ -44,7 +47,10 @@ function Page() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
 
-            <Button size="lg" className="text-lg back" variant="ghost" onClick={() => {copyText(id)}}
+            <Button size="lg" className="text-lg back" variant="ghost" onClick={() => {
+              notify();
+              copyText(id);
+            }}
             >
         Copy share message to text
       </Button>
@@ -53,6 +59,19 @@ function Page() {
         Go to homepage
       </Button>
         </div>
+        <ToastContainer
+        position="bottom-center"
+        autoClose={3800}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+        />
 
         </motion.div>
     }

@@ -1,10 +1,10 @@
-
 WRAPPING UP
 * Cybersecurity; tighten loose hatches on things
 * Copied verification toast
 * Write linkedin post
+X Write better readme
 
-SENDING MESSAGES IN 2030
+BEFORE JANUARY 1ST, 2030
 * Make sure decryption works like i think it works
 * Create message email template
 * Send test emails
