@@ -32,6 +32,25 @@ export default function RootLayout({
         <main className="min-h-screen bg-[conic-gradient(#9233ea,#db2777,#2564eb)] text-neutral-100 flex items-center justify-center p-6">
           {children}
         </main>
+
+        <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+            <script
+              dangerouslySetInnerHTML={{
+              __html: `
+              const updateKofiWidget = (locale) => {
+              kofiWidgetOverlay.draw('milesjaffee', {
+                type: 'floating-chat',
+                'floating-chat.donateButton.text': 'Support Me',
+                'floating-chat.donateButton.background-color': '#fffc',
+                'floating-chat.donateButton.text-color': '#000'
+              });
+              };
+
+              // Initial setup
+              updateKofiWidget('en');
+              `,
+              }}
+            ></script>
         
       </body>
     </html>

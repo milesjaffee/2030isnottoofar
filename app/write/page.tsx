@@ -4,10 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
+import { redirect } from "next/navigation";
 
 export default function WriteScreen({ onBack }: { onBack: () => void }) {
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
+
+
 
   return (
     <motion.div
@@ -15,7 +18,7 @@ export default function WriteScreen({ onBack }: { onBack: () => void }) {
       animate={{ opacity: 1, y: 0 }}
       className="max-w-2xl w-full space-y-8"
     >
-      <button onClick={onBack} className="text-neutral-200 hover:text-neutral-0">← Back</button>
+      <button onClick={() => {redirect('/')}} className="text-neutral-200 hover:text-neutral-0">← Back</button>
 
       <h2 className="text-4xl font-semibold">Write to 2030 you</h2>
       <p className="">

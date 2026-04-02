@@ -1,6 +1,5 @@
 WRAPPING UP
-* Cybersecurity; tighten loose hatches on things
-* Copied verification toast
+X Copied verification toast
 * Write linkedin post
 X Write better readme
 
