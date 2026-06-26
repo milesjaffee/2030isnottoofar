@@ -50,7 +50,7 @@ const possibleMessages = [
   "I sent a message to myself in the future.",
   "I put a message in a bottle for 2030.",
   "A message to myself is waiting in the future.",
-  "The arm of the future has reached out from the past.",
+  "The arm of the future has reached from the past.",
   "Waiting for something to happen?",
   "Time is getting the best of us.",
   "I just made something happen in the future.",
@@ -63,6 +63,16 @@ const possibleMessages = [
   "I just did something mysterious and slightly important.",
   "I just did something unimportant yet highly meaningful.",
   "I talked to the future!",
+  "The work was mysterious and important.",
+  "You can't step in the same river twice.",
+  "Stay esoteric.",
+  "Think different, I think.",
+  "Future me will be hearing from me shortly.",
+  "My future self has just recieved a very odd email.",
+  "Meanwhile, in 2030...",
+  "I've just moved something in the fourth dimension.",
+  "When you read this, Looney Tunes will be public domain.",
+  "What are you doing till 2030?"
 ];
 
 const getFlavorText = (n: number) => {
