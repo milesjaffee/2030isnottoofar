@@ -1,8 +1,8 @@
 'use client';
 
-import StatCard from "@/components/StatCard";
+import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion"
-import { useSearchParams } from "next/navigation";
+import { redirect } from "next/navigation";
 
 export default function Verified() {
 
@@ -18,10 +18,13 @@ export default function Verified() {
         If you've clicked this link multiple times, your message has already been verified and will be sent to your future self when the time comes.
       </p>
       <p className="text-neutral-100 text-lg">
-        If this is the first time you've seen this, or if you got this from somewhere other than an email from us, contact support at (email)
+        If this is the first time you've seen this, or if you got this from somewhere other than an email from us, contact support at mej327@lehigh.edu.
       </p>
 
-      <StatCard label="Return Home" value="Home" />
+      <Button size="lg" className="text-lg back" variant="ghost" onClick={() => {redirect('/')}}
+      >
+        Go to homepage
+      </Button>
 
     </motion.div>
     )   
