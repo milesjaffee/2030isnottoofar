@@ -4,6 +4,7 @@ import { resend } from "@/lib/resend";
 import crypto from "crypto";
 import { encrypt } from "@/lib/crypto";
 import * as fs from 'node:fs';
+import { CreateEmailResponse } from "resend";
 
 
 function email_html(token: string) {
@@ -14,17 +15,15 @@ function email_html(token: string) {
   return html;
 }
 
-function sendVerificationEmail(email: string, token: string) {
+function sendVerificationEmail(email: string, token: string): Promise<CreateEmailResponse> {
   console.log("Email sent to", email);
-  resend.emails.send( {
+  return resend.emails.send( {
     from: '2030s@2030.milesj.org',
     to: email,
     subject: "Confirm email address for 2030",
     html: email_html(token)
-  }).then(() => {
-    console.log("hit resend.emails.send");
-  }
-  );
+  })
+  
 }
 
 export async function POST(req: Request) {
@@ -54,7 +53,15 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "DB error" }, { status: 500 });
   }
 
-  sendVerificationEmail(email, token);
-  //console.log("sent verification email", email, token);
-  return NextResponse.json({ success: true });
+  const emailsent = await sendVerificationEmail(email, token);
+  if (!emailsent?.data) {
+    return NextResponse.json({ error: "Email sending failed", message: emailsent.error }, { status: 502 });
+  }
+
+  return NextResponse.json({
+    success: true,
+    emailSent: true,
+    emailId: emailsent.data.id,
+  });
+  return NextResponse.json({ success: true, emailsent });
 }
