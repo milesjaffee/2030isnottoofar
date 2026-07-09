@@ -72,7 +72,8 @@ const possibleMessages = [
   "Meanwhile, in 2030...",
   "I've just moved something in the fourth dimension.",
   "When you read this, Looney Tunes will be public domain.",
-  "What are you doing till 2030?"
+  "What are you doing till 2030?",
+  "The arm of the future has reached towards the past.",
 ];
 
 const getFlavorText = (n: number) => {
@@ -160,6 +161,10 @@ export async function GET(req: Request) {
     {
       width: 1100,
       height: 1500,
+      headers: {
+        'Content-Type': 'image/png',
+        'Content-Disposition': `attachment; filename="2030_${rank}.png"`,
+      },
     }
   );
     
